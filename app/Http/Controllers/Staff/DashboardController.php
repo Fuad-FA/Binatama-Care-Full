@@ -96,12 +96,17 @@ class DashboardController extends Controller
             ->with('patient')
             ->orderByDesc('created_at')
             ->get()
+            // ->filter(function ($trx) {
+            //     // Filter hanya transaksi yang punya layanan kesehatan
+            //     $itemNames = $trx->items->pluck('nama_item')->toArray();
+            //     $fields    = $this->getFieldsFromItems($itemNames);
+            //     return !empty($fields);
+            // });
             ->filter(function ($trx) {
-                // Filter hanya transaksi yang punya layanan kesehatan
-                $itemNames = $trx->items->pluck('nama_item')->toArray();
-                $fields    = $this->getFieldsFromItems($itemNames);
-                return !empty($fields);
-            });
+    $trx->loadMissing('items');
+
+    return $trx->needsMedicalRecord();
+});
 
         $recentRecords = MedicalRecord::with('patient')
             ->where('user_id', $userId)

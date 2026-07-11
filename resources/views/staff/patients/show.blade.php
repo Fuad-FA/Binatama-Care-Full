@@ -240,6 +240,7 @@
                     {{-- <th style="font-size:12px;color:#888;font-weight:600;">TENSI</th>
                     <th style="font-size:12px;color:#888;font-weight:600;">PETUGAS</th> --}}
                     <th style="font-size:12px;color:#888;font-weight:600;">TENSI</th>
+                    <th style="font-size:12px;color:#888;font-weight:600;">DATA TAMBAHAN</th>
                     <th style="font-size:12px;color:#888;font-weight:600;">BMI</th>
                     <th style="font-size:12px;color:#888;font-weight:600;">CATATAN GIZI</th>
                     <th style="font-size:12px;color:#888;font-weight:600;">PETUGAS</th>
@@ -336,6 +337,26 @@
     @endif
 </td>
 
+{{-- Data Pemeriksaan Lainnya --}}
+<td>
+    @if($rec->custom_data)
+
+        @foreach($rec->custom_data as $cd)
+            <div style="font-size:11px; line-height:1.4;">
+                <span class="text-muted">{{ $cd['label'] }}</span><br>
+                <strong>{{ $cd['value'] }} {{ $cd['unit'] }}</strong>
+            </div>
+
+            @if(!$loop->last)
+                <hr class="my-1">
+            @endif
+        @endforeach
+
+    @else
+        <span class="text-muted">-</span>
+    @endif
+</td>
+
 {{-- Catatan Gizi --}}
 <td>
     @if($rec->catatan_gizi)
@@ -354,7 +375,7 @@
                 @empty
                 <tr>
                     {{-- <td colspan="6" class="text-center py-4 text-muted"> --}}
-                        <td colspan="8" class="text-center py-4 text-muted">
+                        <td colspan="9" class="text-center py-4 text-muted">
                         <i class="bi bi-clipboard2 d-block mb-1 opacity-25 fs-3"></i>
                         Belum ada riwayat pemeriksaan.
                     </td>

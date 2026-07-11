@@ -160,117 +160,62 @@
                     <td style="font-size:13px;">{{ $user->jabatan ?? '-' }}</td>
 
                     {{-- Status --}}
-                    {{-- <td>
-                        @if($user->is_active)
+                    <td>
+                        @if($user->locked_at)
+                            <span class="badge bg-danger px-2 py-1">
+                                <i class="bi bi-lock-fill me-1"></i>Terkunci
+                            </span>
+
+                            <div style="font-size:10px;color:#888;margin-top:2px;">
+                                {{ $user->login_attempts }}x gagal
+                            </div>
+
+                        @elseif($user->is_active)
                             <span class="badge bg-success-subtle text-success px-2 py-1">
                                 <i class="bi bi-circle-fill me-1" style="font-size:7px;"></i>Aktif
                             </span>
+
                         @else
                             <span class="badge bg-danger-subtle text-danger px-2 py-1">
                                 <i class="bi bi-circle-fill me-1" style="font-size:7px;"></i>Nonaktif
                             </span>
                         @endif
+
                         @if($user->must_change_password)
                             <span class="badge bg-warning-subtle text-warning px-2 py-1 ms-1">
                                 <i class="bi bi-key-fill me-1"></i>Reset
                             </span>
                         @endif
-                    </td> --}}
-
-{{-- Status --}}
-<td>
-    @if($user->locked_at)
-        <span class="badge bg-danger px-2 py-1">
-            <i class="bi bi-lock-fill me-1"></i>Terkunci
-        </span>
-
-        <div style="font-size:10px;color:#888;margin-top:2px;">
-            {{ $user->login_attempts }}x gagal
-        </div>
-
-    @elseif($user->is_active)
-        <span class="badge bg-success-subtle text-success px-2 py-1">
-            <i class="bi bi-circle-fill me-1" style="font-size:7px;"></i>Aktif
-        </span>
-
-    @else
-        <span class="badge bg-danger-subtle text-danger px-2 py-1">
-            <i class="bi bi-circle-fill me-1" style="font-size:7px;"></i>Nonaktif
-        </span>
-    @endif
-
-    @if($user->must_change_password)
-        <span class="badge bg-warning-subtle text-warning px-2 py-1 ms-1">
-            <i class="bi bi-key-fill me-1"></i>Reset
-        </span>
-    @endif
-</td>
+                    </td>
 
                     {{-- Last Login --}}
                     <td style="font-size:12px;color:#888;">
                         {{ $user->last_login ? $user->last_login->diffForHumans() : 'Belum pernah' }}
                     </td>
 
-                    {{-- Aksi --}}
+                    {{-- Bagian AKSI yang Baru --}}
                     <td>
                         <div class="d-flex gap-1">
-                            {{-- Lihat --}}
+                            {{-- Detail --}}
                             <a href="{{ route('admin.users.show', $user) }}"
-                               class="btn btn-sm btn-outline-info" title="Detail">
-                                <i class="bi bi-eye"></i>
+                               class="btn btn-sm btn-primary"
+                               title="Lihat Detail">
+                                <i class="bi bi-eye me-1"></i>Detail
                             </a>
-                            {{-- Edit --}}
-                            <a href="{{ route('admin.users.edit', $user) }}"
-                               class="btn btn-sm btn-outline-primary" title="Edit">
-                                <i class="bi bi-pencil"></i>
-                            </a>
-                            {{-- Toggle Aktif --}}
-                            <form action="{{ route('admin.users.toggle-active', $user) }}"
-                                  method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit"
-                                        class="btn btn-sm {{ $user->is_active ? 'btn-outline-warning' : 'btn-outline-success' }}"
-                                        title="{{ $user->is_active ? 'Nonaktifkan' : 'Aktifkan' }}"
-                                        onclick="return confirm('{{ $user->is_active ? 'Nonaktifkan' : 'Aktifkan' }} akun ini?')">
-                                    <i class="bi bi-{{ $user->is_active ? 'pause-circle' : 'play-circle' }}"></i>
-                                </button>
-                            </form>
-                            {{-- Reset Password --}}
-                            <form action="{{ route('admin.users.reset-password', $user) }}"
-                                  method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit" class="btn btn-sm btn-outline-secondary"
-                                        title="Reset Password"
-                                        onclick="return confirm('Reset password {{ $user->name }} ke default?')">
-                                    <i class="bi bi-key"></i>
-                                </button>
-                            </form>
-
-                            {{-- Unlock Akun --}}
-@if($user->locked_at)
-<form action="{{ route('admin.users.unlock', $user) }}"
-      method="POST" class="d-inline">
-    @csrf
-
-    <button type="submit"
-            class="btn btn-sm btn-danger"
-            title="Buka Kunci Akun"
-            onclick="return confirm('Buka kunci akun {{ $user->name }}?')">
-        <i class="bi bi-unlock-fill"></i>
-    </button>
-</form>
-@endif
-                            {{-- Hapus --}}
+                            {{-- Hapus — tidak bisa hapus diri sendiri --}}
+                            @if($user->id !== auth()->id())
                             <form action="{{ route('admin.users.destroy', $user) }}"
                                   method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-danger"
-                                        title="Hapus"
-                                        onclick="return confirm('Hapus akun {{ $user->name }}? Tindakan ini tidak bisa dibatalkan!')">
+                                <button type="submit"
+                                        class="btn btn-sm btn-outline-danger"
+                                        title="Hapus User"
+                                        onclick="return confirm('Hapus akun {{ $user->name }}?\n\nTindakan ini tidak bisa dibatalkan!')">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </form>
+                            @endif
                         </div>
                     </td>
                 </tr>

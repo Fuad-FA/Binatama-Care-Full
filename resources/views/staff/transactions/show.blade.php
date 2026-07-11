@@ -164,7 +164,7 @@
         }
     @endphp --}}
 
-    @php
+    {{-- @php
     $itemNamesShow = $transaction->items->pluck('nama_item')->toArray();
 
     // Whitelist EKSAK layanan yang memerlukan rekam medis
@@ -185,9 +185,15 @@
             }
         }
     }
+@endphp --}}
+
+@php
+    $needsMedicalNow = $transaction->needsMedicalRecord();
 @endphp
 
-    @if(!$needsMedical || $transaction->medical_record_id)
+    {{-- @if(!$needsMedical || $transaction->medical_record_id) --}}
+
+    @if(!$needsMedicalNow || $transaction->medical_record_id)
         {{-- Rekam medis sudah ada atau tidak diperlukan — bisa cetak --}}
         <a href="{{ route('staff.transactions.nota', $transaction) }}"
            target="_blank" class="btn btn-success px-4 fw-semibold">
@@ -195,7 +201,7 @@
         </a>
     @else
         {{-- Rekam medis belum diisi — tombol menuju form rekam medis --}}
-        @php
+        {{-- @php
             $fieldsShow = [];
             $mappingShow = [
                 'gula_darah'   => ['cek gula','gula darah'],
@@ -223,11 +229,12 @@
                 }
             }
             $fieldsShow = array_unique($fieldsShow);
-        @endphp
+        @endphp --}}
         <a href="{{ route('staff.medical-records.create', [
                         'patient_id'     => $transaction->patient_id,
                         'transaction_id' => $transaction->id,
-                        'fields'         => implode(',', $fieldsShow),
+                        // 'fields'         => implode(',', $fieldsShow),
+                        'fields' => $transaction->getMedicalFieldsString(),
                    ]) }}"
            class="btn btn-warning px-4 fw-semibold">
             <i class="bi bi-clipboard2-pulse-fill me-2"></i>

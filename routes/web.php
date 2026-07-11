@@ -144,6 +144,56 @@ Route::middleware(['auth', 'role:admin'])
 
             Route::get('/activity-log', [\App\Http\Controllers\Admin\ActivityLogController::class, 'index'])
             ->name('activity-log');
+
+            // Ganti Password Admin (3 step + OTP)
+        // Route::get('/ganti-password',
+        //     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'showStep1'])
+        //     ->name('admin.password.step1');
+        // Route::post('/ganti-password/verifikasi',
+        //     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'verifyOldPassword'])
+        //     ->name('admin.password.verify-old');
+        // Route::get('/ganti-password/otp',
+        //     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'showStep2'])
+        //     ->name('admin.password.step2');
+        // Route::post('/ganti-password/otp/verifikasi',
+        //     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'verifyOtp'])
+        //     ->name('admin.password.verify-otp');
+        // Route::get('/ganti-password/baru',
+        //     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'showStep3'])
+        //     ->name('admin.password.step3');
+        // Route::post('/ganti-password/baru',
+        //     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'updatePassword'])
+        //     ->name('admin.password.update');
+        // Route::post('/ganti-password/kirim-ulang',
+        //     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'resendOtp'])
+        //     ->name('admin.password.resend');
+        Route::get('/ganti-password',
+    [\App\Http\Controllers\Admin\AdminPasswordController::class, 'showStep1'])
+    ->name('password.step1'); // <-- Cukup tulis password.step1
+
+Route::post('/ganti-password/verifikasi',
+    [\App\Http\Controllers\Admin\AdminPasswordController::class, 'verifyOldPassword'])
+    ->name('password.verify-old');
+
+Route::get('/ganti-password/otp',
+    [\App\Http\Controllers\Admin\AdminPasswordController::class, 'showStep2'])
+    ->name('password.step2');
+
+Route::post('/ganti-password/otp/verifikasi',
+    [\App\Http\Controllers\Admin\AdminPasswordController::class, 'verifyOtp'])
+    ->name('password.verify-otp');
+
+Route::get('/ganti-password/baru',
+    [\App\Http\Controllers\Admin\AdminPasswordController::class, 'showStep3'])
+    ->name('password.step3');
+
+Route::post('/ganti-password/baru',
+    [\App\Http\Controllers\Admin\AdminPasswordController::class, 'updatePassword'])
+    ->name('password.update');
+
+Route::post('/ganti-password/kirim-ulang',
+    [\App\Http\Controllers\Admin\AdminPasswordController::class, 'resendOtp'])
+    ->name('password.resend');
     });
 
 // ============================================================

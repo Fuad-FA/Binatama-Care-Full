@@ -405,6 +405,72 @@
 </div>
 @endif
 
+{{-- Field Kustom dari Layanan Buatan Admin --}}
+@foreach($customFields as $cf)
+<div class="col-12 mt-3">
+    <div class="p-3 rounded"
+         style="background:#e3f2fd;border:1px solid #90caf9;">
+        
+        <div class="fw-semibold mb-2" style="font-size:13px;">
+            <i class="bi bi-clipboard-data me-1"
+               style="color:var(--biru-muda);"></i>
+
+            {{ $cf->label }}
+
+            <span class="text-muted"
+                  style="font-size:11px;">
+                ({{ $cf->service->nama }})
+            </span>
+
+            <span class="badge bg-primary ms-1"
+                  style="font-size:9px;">
+                Aktif
+            </span>
+        </div>
+
+        @if($cf->input_type === 'textarea')
+
+            <textarea
+                name="custom_{{ $cf->id }}"
+                class="form-control"
+                rows="3"
+                placeholder="Isi {{ $cf->label }}">{{ old('custom_'.$cf->id) }}</textarea>
+
+        @else
+
+            <div class="input-group input-group-sm">
+                <input
+                    type="{{ $cf->input_type === 'number' ? 'number' : 'text' }}"
+                    name="custom_{{ $cf->id }}"
+                    class="form-control"
+                    step="0.01"
+                    value="{{ old('custom_'.$cf->id) }}"
+                    placeholder="Isi {{ $cf->label }}">
+
+                @if($cf->unit)
+                    <span class="input-group-text">
+                        {{ $cf->unit }}
+                    </span>
+                @endif
+            </div>
+
+        @endif
+
+        @if($cf->normal_text)
+            <div class="text-muted mt-1"
+                 style="font-size:10px;">
+                Normal: {{ $cf->normal_text }}
+            </div>
+        @endif
+
+        <input type="hidden"
+               name="custom_field_ids[]"
+               value="{{ $cf->id }}">
+    </div>
+</div>
+@endforeach
+
+
             {{-- Catatan --}}
             <div class="mb-4">
                 <label class="form-label fw-semibold">Catatan Tambahan</label>
@@ -418,6 +484,13 @@
                     <i class="bi bi-exclamation-triangle me-2"></i>{{ $message }}
                 </div>
             @enderror
+
+            @if(session('error'))
+<div class="alert alert-danger">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+    {{ session('error') }}
+</div>
+@endif
 
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-success px-4 fw-semibold">

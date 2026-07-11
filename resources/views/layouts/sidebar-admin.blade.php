@@ -39,3 +39,9 @@
    class="nav-link {{ request()->routeIs('admin.activity-log') ? 'active' : '' }}">
     <i class="bi bi-clock-history"></i> Riwayat Aktivitas
 </a>
+
+<div class="nav-section">Akun</div>
+<a href="{{ route('admin.password.step1') }}"
+   class="nav-link {{ request()->routeIs('admin.password.*') ? 'active' : '' }}">
+    <i class="bi bi-key-fill"></i> Ganti Password
+</a>

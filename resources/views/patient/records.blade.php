@@ -255,6 +255,22 @@
 </div>
 @endif
 
+@if($rec->custom_data)
+<div class="result-row" style="display:block;">
+    <div style="color:#666;margin-bottom:6px;">
+        Data Pemeriksaan Lainnya
+    </div>
+
+    @foreach($rec->custom_data as $cd)
+    <div class="d-flex justify-content-between py-1">
+        <span style="color:#666;">{{ $cd['label'] }}</span>
+        <strong>{{ $cd['value'] }} {{ $cd['unit'] }}</strong>
+    </div>
+    @endforeach
+</div>
+@endif
+
+
 @if($rec->catatan_gizi)
 <div class="result-row" style="display:block;">
     <div style="color:#666;margin-bottom:6px;">

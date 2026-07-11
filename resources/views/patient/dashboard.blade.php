@@ -279,6 +279,21 @@
         </div>
         @endif
 
+        @if($latestRecord->custom_data)
+<div class="result-item" style="display:block;background:#fafafa;">
+    <div class="result-label mb-2">
+        Data Pemeriksaan Lainnya
+    </div>
+
+    @foreach($latestRecord->custom_data as $cd)
+    <div class="d-flex justify-content-between py-1">
+        <span>{{ $cd['label'] }}</span>
+        <strong>{{ $cd['value'] }} {{ $cd['unit'] }}</strong>
+    </div>
+    @endforeach
+</div>
+@endif
+
         <div class="p-3 text-center">
             <a href="{{ route('patient.records') }}"
                class="btn btn-sm btn-outline-success">

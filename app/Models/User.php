@@ -37,6 +37,7 @@ class User extends Authenticatable
     'last_login',
     'login_attempts',
     'locked_at',
+    'otp_code', 'otp_expires_at',
 ];
 
     protected $hidden = [
@@ -64,6 +65,7 @@ protected function casts(): array
         'password'             => 'hashed',
         'is_active'            => 'boolean',
         'must_change_password' => 'boolean',
+        'otp_expires_at' => 'datetime',
     ];
 }
 

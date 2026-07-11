@@ -36,4 +36,9 @@ class Service extends Model
     {
         return 'Rp ' . number_format($this->harga, 0, ',', '.');
     }
+
+    public function fields()
+{
+    return $this->hasMany(ServiceField::class)->orderBy('sort_order');
+}
 }

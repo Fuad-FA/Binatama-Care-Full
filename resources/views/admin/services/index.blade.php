@@ -49,7 +49,21 @@
                             {{ $service->kode }}
                         </code>
                     </td>
-                    <td class="fw-semibold" style="font-size:14px;">{{ $service->nama }}</td>
+                    {{-- <td class="fw-semibold" style="font-size:14px;">{{ $service->nama }}</td> --}}
+
+                    <td>
+    <div class="fw-semibold" style="font-size:14px;">
+        {{ $service->nama }}
+    </div>
+
+    @if($service->fields->count() > 0)
+        <span class="badge bg-info-subtle text-info mt-1"
+              style="font-size:10px;">
+            <i class="bi bi-clipboard-data me-1"></i>
+            {{ $service->fields->count() }} Field
+        </span>
+    @endif
+</td>
                     {{-- <td style="color:var(--orange);font-weight:600;">
                         {{ $service->harga > 0 ? $service->hargaFormatted() : '<span class="text-muted fw-normal" style="font-size:12px;">Gratis / Termasuk paket</span>' }}
                     </td> --}}

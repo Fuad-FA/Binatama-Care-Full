@@ -46,6 +46,8 @@ protected $fillable = [
 
     'catatan_gizi',
     'catatan',
+
+    'custom_data',
 ];
 
 
@@ -56,7 +58,10 @@ protected $fillable = [
             'gula_darah'      => 'decimal:2',
             'kolesterol'      => 'decimal:2',
             'asam_urat'       => 'decimal:2',
+            'custom_data' => 'array',
         ];
+
+        
     }
 
     // Relasi ke pasien

@@ -267,6 +267,21 @@
 </table>
 @endif
 
+
+@if($rec->custom_data)
+<div class="catatan-box">
+    <div class="catatan-lbl">Data Pemeriksaan Lainnya</div>
+
+    @foreach($rec->custom_data as $cd)
+    <div style="display:flex;justify-content:space-between;">
+        <span>{{ $cd['label'] }}</span>
+        <strong>{{ $cd['value'] }} {{ $cd['unit'] }}</strong>
+    </div>
+    @endforeach
+</div>
+@endif
+
+
 @if($rec->catatan_gizi)
 <div class="catatan-box">
     <div class="catatan-lbl">Catatan Konsultasi Gizi</div>

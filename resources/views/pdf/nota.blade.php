@@ -166,7 +166,7 @@
 
 {{-- HEADER --}}
 <div class="header">
-    <div class="nama-klinik">RUMAH SEHAT BINATAMA</div>
+    <div class="nama-klinik">SMK BINATAMA</div>
     <div class="akreditasi">TERAKREDITASI "A"</div>
     <div class="sub-header">
         Program Keahlian Keperawatan dan Farmasi<br>
@@ -359,7 +359,7 @@
 {{-- FOOTER --}}
 <div class="footer">
     <div class="thanks">Terima Kasih Semoga Sehat Selalu</div>
-    <div class="info">{{ config('app.name', 'SIK Rumah Sehat Binatama') }}</div>
+    <div class="info">Binatama Care</div>
     <div class="info">smkkesbinatama@gmail.com</div>
     <div class="info" style="margin-top:3px;font-size:7px;">
         Dicetak: {{ now()->format('d/m/Y H:i') }}

@@ -125,7 +125,7 @@
 
 {{-- Header --}}
 <div class="header">
-    <h1>RUMAH SEHAT BINATAMA</h1>
+    <h1>SMK BINATAMA</h1>
     <h2>SMK Kesehatan Binatama Yogyakarta</h2>
     <div class="period">LAPORAN BULANAN — {{ strtoupper($namaBulan) }}</div>
 </div>
@@ -214,7 +214,7 @@
 
 {{-- Detail Transaksi --}}
 <div class="header">
-    <h1>RUMAH SEHAT BINATAMA</h1>
+    <h1>SMK BINATAMA</h1>
     <div class="period">DETAIL TRANSAKSI — {{ strtoupper($namaBulan) }}</div>
 </div>
 
@@ -261,7 +261,7 @@
 {{-- Footer --}}
 <div class="footer">
     Dicetak pada {{ now()->locale('id')->isoFormat('dddd, D MMMM Y HH:mm') }} &nbsp;·&nbsp;
-    SIK Rumah Sehat Binatama &nbsp;·&nbsp; SMK Kesehatan Binatama Yogyakarta
+    Binatama Care &nbsp;·&nbsp; SMK Kesehatan Binatama Yogyakarta
 </div>
 
 </body>

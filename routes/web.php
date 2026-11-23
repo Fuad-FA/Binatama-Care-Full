@@ -113,7 +113,7 @@ Route::middleware(['auth', 'role:admin'])
             
 
         // Produk
-        Route::resource('/products', \App\Http\Controllers\Admin\ProductController::class);
+        Route::resource('/products', \App\Http\Controllers\Admin\ProductController::class)->except(['show']);
         Route::post('/products/{product}/toggle-active', [\App\Http\Controllers\Admin\ProductController::class, 'toggleActive'])
             ->name('products.toggle-active');
         Route::post('/products/{product}/stok', [\App\Http\Controllers\Admin\ProductController::class, 'updateStok'])
@@ -213,7 +213,7 @@ Route::middleware(['auth', 'role:admin,guru,siswa', 'check.first.login'])
 
         // Rekam Medis
         Route::resource('/medical-records', \App\Http\Controllers\Staff\MedicalRecordController::class)
-            ->except(['edit', 'update', 'destroy']);
+            ->only(['create', 'store']);
 
         // Transaksi
         Route::resource('/transactions', \App\Http\Controllers\Staff\TransactionController::class)

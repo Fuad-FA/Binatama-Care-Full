@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Pasien — Rumah Sehat Binatama</title>
+    <title>Portal Pasien — Binatama Care</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
@@ -39,7 +39,7 @@
 <div class="content-wrap">
     <div class="top-bar">
         <div>
-            <div class="brand-name"><i class="bi bi-heart-pulse-fill me-1"></i>Rumah Sehat Binatama</div>
+            <div class="brand-name"><i class="bi bi-heart-pulse-fill me-1"></i>Binatama Care</div>
             <div class="brand-sub">SMK Kesehatan Binatama Yogyakarta</div>
         </div>
         <div style="color:rgba(255,255,255,0.6);font-size:11px;">Sistem Informasi Kesehatan</div>
@@ -54,7 +54,7 @@
                 @endif
             </div>
             <div class="hero-title">Portal Pasien</div>
-            <div class="hero-sub">Rumah Sehat Binatama</div>
+            <div class="hero-sub">SMK Binatama</div>
             <div class="role-chip"><i class="bi bi-person-fill me-1"></i>Akses Pasien</div>
             <div class="feature-list">
                 <div class="feature-item"><i class="bi bi-check-circle-fill"></i>Lihat riwayat pemeriksaan</div>

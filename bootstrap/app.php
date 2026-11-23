@@ -20,6 +20,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'check.first.login' => \App\Http\Middleware\CheckFirstLogin::class,
             'patient.auth'      => \App\Http\Middleware\PatientAuth::class,
         ]);
+
+        // Tamu / sesi habis diarahkan ke halaman login yang sesuai (bukan /auth yang 404)
+        $middleware->redirectGuestsTo(fn ($request) => $request->is('admin/*')
+            ? route('login.admin')
+            : route('login.guru'));
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

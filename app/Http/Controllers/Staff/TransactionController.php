@@ -78,7 +78,7 @@ class TransactionController extends Controller
             'items.*.type' => 'required|in:service,package,product',
             'items.*.id'   => 'required|integer',
             'items.*.qty'  => 'required|integer|min:1',
-            'items.*.harga'=> 'required|numeric|min:0',
+            'items.*.harga'=> 'nullable|numeric|min:0', // diabaikan: harga selalu diambil dari database
             'diskon'       => 'nullable|numeric|min:0',
         ], [
             'patient_id.required' => 'Pasien wajib dipilih.',
@@ -91,20 +91,55 @@ class TransactionController extends Controller
             $subtotal = 0;
             $itemsData = [];
 
+            // Jumlah per produk digabung dulu (produk yang sama di dua baris tetap dicek satu kali),
+            // lalu barisnya dikunci supaya dua transaksi serentak tidak bisa memakai stok yang sama.
+            $qtyProduk = [];
             foreach ($request->items as $item) {
-                $nama     = '';
-                $hargaSat = (float) $item['harga'];
-                $qty      = (int) $item['qty'];
+                if ($item['type'] === 'product') {
+                    $qtyProduk[$item['id']] = ($qtyProduk[$item['id']] ?? 0) + (int) $item['qty'];
+                }
+            }
 
+            $produk = [];
+            foreach ($qtyProduk as $id => $qtyTotal) {
+                $prod = Product::lockForUpdate()->find($id);
+
+                if (!$prod || !$prod->is_active) {
+                    throw new \DomainException('Produk tidak ditemukan atau sudah tidak aktif.');
+                }
+                if ($prod->harga_by_order) {
+                    throw new \DomainException("Produk {$prod->nama} berharga by order dan tidak bisa dijual lewat transaksi ini.");
+                }
+                if ($qtyTotal > $prod->stok) {
+                    throw new \DomainException(
+                        "Stok {$prod->nama} tidak cukup (tersisa {$prod->stok} {$prod->satuan}, diminta {$qtyTotal})."
+                    );
+                }
+                $produk[$id] = $prod;
+            }
+
+            foreach ($request->items as $item) {
+                $qty = (int) $item['qty'];
+
+                // Harga SELALU dari database, bukan dari kiriman browser
                 if ($item['type'] === 'service') {
-                    $svc  = Service::findOrFail($item['id']);
-                    $nama = $svc->nama;
+                    $svc = Service::find($item['id']);
+                    if (!$svc || !$svc->is_active) {
+                        throw new \DomainException('Layanan tidak ditemukan atau sudah tidak aktif.');
+                    }
+                    $nama     = $svc->nama;
+                    $hargaSat = (float) $svc->harga;
                 } elseif ($item['type'] === 'package') {
-                    $pkg  = Package::findOrFail($item['id']);
-                    $nama = $pkg->nama;
+                    $pkg = Package::find($item['id']);
+                    if (!$pkg || !$pkg->is_active) {
+                        throw new \DomainException('Paket tidak ditemukan atau sudah tidak aktif.');
+                    }
+                    $nama     = $pkg->nama;
+                    $hargaSat = (float) $pkg->harga;
                 } else {
-                    $prod = Product::findOrFail($item['id']);
-                    $nama = $prod->nama;
+                    $prod     = $produk[$item['id']];
+                    $nama     = $prod->nama;
+                    $hargaSat = (float) $prod->harga;
                     $prod->decrement('stok', $qty);
                 }
 
@@ -164,6 +199,9 @@ class TransactionController extends Controller
             return redirect()->route('staff.transactions.show', $transaction->id)
                 ->with('success', 'Transaksi ' . $transaction->no_transaksi . ' berhasil disimpan!');
 
+        } catch (\DomainException $e) {
+            DB::rollBack();
+            return back()->withInput()->with('error', $e->getMessage());
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());

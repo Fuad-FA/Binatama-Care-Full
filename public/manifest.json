@@ -1,8 +1,8 @@
 {
-    "name": "SIK Rumah Sehat Binatama",
-    "short_name": "RS Binatama",
+    "name": "Binatama Care",
+    "short_name": "Binatama Care",
     "description": "Sistem Informasi Kesehatan SMK Kesehatan Binatama Yogyakarta",
-    "start_url": "/",
+    "start_url": "/staff/dashboard",
     "display": "standalone",
     "orientation": "portrait",
     "background_color": "#1565C0",

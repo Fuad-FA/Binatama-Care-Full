@@ -95,6 +95,7 @@ $stafPerforma = User::where('role', '!=', 'admin')
 
     // Ambil semua data untuk laporan
     $transaksi = \App\Models\Transaction::with(['patient', 'user', 'items'])
+        ->where('status', 'selesai')
         ->whereMonth('created_at', $bulan)
         ->whereYear('created_at', $tahun)
         ->orderBy('created_at')
@@ -123,7 +124,7 @@ $stafPerforma = User::where('role', '!=', 'admin')
 
     // Ringkasan per layanan/produk
     $itemSummary = \App\Models\TransactionItem::whereHas('transaction', fn($q) =>
-        $q->whereMonth('created_at', $bulan)->whereYear('created_at', $tahun))
+        $q->where('status', 'selesai')->whereMonth('created_at', $bulan)->whereYear('created_at', $tahun))
         ->selectRaw('nama_item, SUM(qty) as total_qty, SUM(subtotal) as total_pendapatan')
         ->groupBy('nama_item')
         ->orderByDesc('total_pendapatan')
@@ -147,7 +148,7 @@ private function exportXlsx($transaksi, $stafPerforma, $itemSummary, $namaBulan,
     $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
     $spreadsheet->getProperties()
         ->setTitle('Laporan Bulanan ' . $namaBulan)
-        ->setCreator('SIK Rumah Sehat Binatama');
+        ->setCreator('Binatama Care');
 
     // ===== SHEET 1: RINGKASAN =====
     $sheet1 = $spreadsheet->getActiveSheet();
@@ -171,7 +172,7 @@ private function exportXlsx($transaksi, $stafPerforma, $itemSummary, $namaBulan,
 
     // Judul
     $sheet1->mergeCells('A1:F1');
-    $sheet1->setCellValue('A1', 'LAPORAN BULANAN RUMAH SEHAT BINATAMA');
+    $sheet1->setCellValue('A1', 'LAPORAN BULANAN SMK BINATAMA');
     $sheet1->getStyle('A1')->applyFromArray($titleStyle);
 
     $sheet1->mergeCells('A2:F2');

@@ -139,7 +139,7 @@
 
     <div class="brand">
         <i class="bi bi-heart-pulse-fill me-1"></i>
-        Rumah Sehat Binatama — SMK Kesehatan Binatama Yogyakarta
+        Binatama Care — SMK Kesehatan Binatama Yogyakarta
     </div>
 </div>
 

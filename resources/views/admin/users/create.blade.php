@@ -122,17 +122,6 @@
                 </div>
             </div>
 
-            {{-- Tombol --}}
-            <div class="d-flex gap-2" id="field-buttons" style="display:none!important;">
-                <button type="submit" class="btn btn-primary px-4">
-                    <i class="bi bi-check-circle me-2"></i>Simpan
-                </button>
-                <a href="{{ route('admin.users.index') }}"
-                   class="btn btn-outline-secondary px-4">
-                    <i class="bi bi-arrow-left me-2"></i>Batal
-                </a>
-            </div>
-
             {{-- Tombol selalu tampil --}}
             <div class="d-flex gap-2 mt-2">
                 <button type="submit" class="btn btn-primary px-4">

@@ -10,29 +10,6 @@ use Illuminate\Http\Request;
 
 class MedicalRecordController extends Controller
 {
-    public function index(Request $request)
-    {
-        $query = MedicalRecord::with(['patient', 'user'])
-            ->where('user_id', auth()->id());
-
-        if ($request->filled('search')) {
-            $query->whereHas('patient', function ($q) use ($request) {
-                $q->where('nama', 'like', '%' . $request->search . '%')
-                  ->orWhere('no_rm', 'like', '%' . $request->search . '%');
-            });
-        }
-
-        if ($request->filled('tanggal')) {
-            $query->whereDate('tanggal_periksa', $request->tanggal);
-        }
-
-        $records = $query->orderByDesc('tanggal_periksa')
-                         ->orderByDesc('created_at')
-                         ->paginate(15);
-
-        return view('staff.medical.index', compact('records'));
-    }
-
     public function create(Request $request)
     {
         $patient      = Patient::findOrFail($request->patient_id);
@@ -216,12 +193,6 @@ class MedicalRecordController extends Controller
 
         return redirect()->route('staff.patients.show', $record->patient_id)
             ->with('success', 'Hasil pemeriksaan berhasil disimpan!');
-    }
-
-    public function show(MedicalRecord $medicalRecord)
-    {
-        $medicalRecord->load(['patient', 'user']);
-        return view('staff.medical.show', compact('medicalRecord'));
     }
 
     public function destroy(MedicalRecord $medicalRecord)

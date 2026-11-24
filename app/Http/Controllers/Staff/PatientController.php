@@ -173,11 +173,6 @@ return redirect()
             ->with('success', 'Data pasien berhasil diperbarui.');
     }
 
-    // public function destroy(Patient $patient)
-    // {
-    //     abort(403, 'Data pasien tidak dapat dihapus.');
-    // }
-
     public function destroy(Patient $patient)
 {
     // Hanya admin yang boleh hapus

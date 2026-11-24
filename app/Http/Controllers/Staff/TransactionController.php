@@ -12,6 +12,7 @@ use App\Models\Service;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class TransactionController extends Controller
 {
@@ -74,6 +75,9 @@ class TransactionController extends Controller
     {
         $request->validate([
             'patient_id'   => 'required|exists:patients,id',
+            // Rekam medis yang ditautkan harus milik pasien yang sama pada transaksi ini
+            'medical_record_id' => ['nullable', Rule::exists('medical_records', 'id')
+                                        ->where('patient_id', $request->input('patient_id'))],
             'items'        => 'required|array|min:1',
             'items.*.type' => 'required|in:service,package,product',
             'items.*.id'   => 'required|integer',
@@ -82,6 +86,7 @@ class TransactionController extends Controller
             'diskon'       => 'nullable|numeric|min:0',
         ], [
             'patient_id.required' => 'Pasien wajib dipilih.',
+            'medical_record_id.exists' => 'Rekam medis tidak sesuai dengan pasien yang dipilih.',
             'items.required'      => 'Pilih minimal satu layanan atau produk.',
             'items.min'           => 'Pilih minimal satu layanan atau produk.',
         ]);

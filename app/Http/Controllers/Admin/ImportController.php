@@ -27,8 +27,6 @@ class ImportController extends Controller
             'sheet.required'=> 'Pilih sheet yang akan diimport.',
         ]);
 
-        // $path        = $request->file('file')->store('imports', 'local');
-        // $fullPath    = storage_path('app/' . $path);
         $file = $request->file('file');
 
 $filename = time() . '_' . $file->getClientOriginalName();
@@ -59,7 +57,6 @@ $fullPath = storage_path('app/imports/' . $filename);
         }
 
         // Hapus file setelah diproses
-        // \Storage::disk('local')->delete($path);
         if (file_exists($fullPath)) {
     unlink($fullPath);
 }
@@ -71,108 +68,6 @@ $fullPath = storage_path('app/imports/' . $filename);
                 ? 'Simulasi selesai — tidak ada data yang disimpan.'
                 : 'Import selesai!');
     }
-
-    // private function importGuru($spreadsheet, bool $isDryRun, array &$result): void
-    // {
-    //     try {
-    //         $ws   = $spreadsheet->getSheetByName('GURU KARYAWAN');
-    //         $rows = $ws->toArray(null, true, true, false);
-    //     } catch (\Exception $e) {
-    //         $result['log'][] = ['type' => 'error', 'msg' => 'Sheet GURU KARYAWAN tidak ditemukan.'];
-    //         return;
-    //     }
-
-    //     foreach (array_slice($rows, 1) as $row) {
-    //         $nama    = trim($row[1] ?? '');
-    //         $jabatan = trim($row[3] ?? '');
-
-    //         if (empty($nama) || $nama === 'NAMA') continue;
-
-    //         $username = $this->generateUsername($nama);
-
-    //         $existsByName = User::where('name', $nama)->where('role', 'guru')->exists();
-    //         if ($existsByName) {
-    //             $result['duplikat']++;
-    //             $result['log'][] = ['type' => 'skip', 'msg' => "$nama (duplikat)"];
-    //             continue;
-    //         }
-
-    //         if (!$isDryRun) {
-    //             try {
-    //                 User::create([
-    //                     'name'                 => $nama,
-    //                     'username'             => $username,
-    //                     'email'                => null,
-    //                     'password'             => Hash::make('password'),
-    //                     'role'                 => 'guru',
-    //                     'jabatan'              => $jabatan ?: 'Guru',
-    //                     'barcode'              => null,
-    //                     'is_active'            => true,
-    //                     'must_change_password' => true,
-    //                 ]);
-    //                 $result['berhasil']++;
-    //                 $result['log'][] = ['type' => 'ok', 'msg' => "$nama → @$username ($jabatan)"];
-    //             } catch (\Exception $e) {
-    //                 $result['error']++;
-    //                 $result['log'][] = ['type' => 'error', 'msg' => "$nama: " . $e->getMessage()];
-    //             }
-    //         } else {
-    //             $result['berhasil']++;
-    //             $result['log'][] = ['type' => 'dry', 'msg' => "[SIMULASI] $nama → @$username ($jabatan)"];
-    //         }
-    //     }
-    // }
-
-    // private function importSiswa($spreadsheet, bool $isDryRun, array &$result): void
-    // {
-    //     try {
-    //         $ws   = $spreadsheet->getSheetByName('SISWA');
-    //         $rows = $ws->toArray(null, true, true, false);
-    //     } catch (\Exception $e) {
-    //         $result['log'][] = ['type' => 'error', 'msg' => 'Sheet SISWA tidak ditemukan.'];
-    //         return;
-    //     }
-
-    //     foreach (array_slice($rows, 1) as $row) {
-    //         $barcode = trim($row[1] ?? '');
-    //         $nama    = trim($row[2] ?? '');
-
-    //         if (empty($nama) || empty($barcode) || $nama === 'NAMA') continue;
-
-    //         $username = strtolower($barcode);
-
-    //         $existsByBarcode = User::where('barcode', $barcode)->exists();
-    //         if ($existsByBarcode) {
-    //             $result['duplikat']++;
-    //             $result['log'][] = ['type' => 'skip', 'msg' => "$nama [$barcode] (duplikat)"];
-    //             continue;
-    //         }
-
-    //         if (!$isDryRun) {
-    //             try {
-    //                 User::create([
-    //                     'name'                 => $nama,
-    //                     'username'             => $username,
-    //                     'email'                => null,
-    //                     'password'             => Hash::make('siswa'),
-    //                     'role'                 => 'siswa',
-    //                     'jabatan'              => null,
-    //                     'barcode'              => $barcode,
-    //                     'is_active'            => true,
-    //                     'must_change_password' => true,
-    //                 ]);
-    //                 $result['berhasil']++;
-    //                 $result['log'][] = ['type' => 'ok', 'msg' => "$nama [$barcode]"];
-    //             } catch (\Exception $e) {
-    //                 $result['error']++;
-    //                 $result['log'][] = ['type' => 'error', 'msg' => "$nama: " . $e->getMessage()];
-    //             }
-    //         } else {
-    //             $result['berhasil']++;
-    //             $result['log'][] = ['type' => 'dry', 'msg' => "[SIMULASI] $nama [$barcode]"];
-    //         }
-    //     }
-    // }
 
 private function importGuru($spreadsheet, bool $isDryRun, array &$result): void
 {

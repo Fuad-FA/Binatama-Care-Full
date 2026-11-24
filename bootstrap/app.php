@@ -11,10 +11,6 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // $middleware->alias([
-        //     'role'              => \App\Http\Middleware\RoleMiddleware::class,
-        //     'check.first.login' => \App\Http\Middleware\CheckFirstLogin::class,
-        // ]);
         $middleware->alias([
             'role'              => \App\Http\Middleware\RoleMiddleware::class,
             'check.first.login' => \App\Http\Middleware\CheckFirstLogin::class,

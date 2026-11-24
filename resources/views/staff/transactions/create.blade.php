@@ -13,55 +13,6 @@
 <div class="col-lg-7">
 
     {{-- Pilih Pasien --}}
-    {{-- <div class="card border-0 shadow-sm mb-4" style="border-radius:12px;">
-        <div class="card-header fw-bold py-3"
-             style="background:var(--biru-tua);border-radius:12px 12px 0 0;color:#fff;">
-            <i class="bi bi-person-fill me-2"></i>Pasien
-        </div>
-        <div class="card-body p-3">
-            @if($patient)
-                <input type="hidden" name="patient_id" value="{{ $patient->id }}">
-                @if($medicalRecord)
-                    <input type="hidden" name="medical_record_id" value="{{ $medicalRecord->id }}">
-                @endif
-                <div class="d-flex align-items-center gap-3 p-2 rounded"
-                     style="background:#e8f5e9;">
-                    <div style="width:44px;height:44px;border-radius:50%;background:var(--hijau);
-                                display:flex;align-items:center;justify-content:center;
-                                color:#fff;font-weight:700;font-size:18px;">
-                        {{ strtoupper(substr($patient->nama, 0, 1)) }}
-                    </div>
-                    <div>
-                        <div class="fw-bold">{{ $patient->nama }}</div>
-                        <div style="font-size:12px;color:#555;">
-                            <code style="background:#c8e6c9;padding:1px 6px;border-radius:3px;">
-                                {{ $patient->no_rm }}
-                            </code>
-                            @if($medicalRecord)
-                                <span class="badge bg-success ms-1">+ Rekam Medis Terlampir</span>
-                            @endif
-                        </div>
-                    </div>
-                    <a href="{{ route('staff.transactions.create') }}"
-                       class="btn btn-sm btn-outline-secondary ms-auto">Ganti</a>
-                </div>
-            @else
-                <div class="input-group mb-2">
-                    <span class="input-group-text bg-white">
-                        <i class="bi bi-search text-muted"></i>
-                    </span>
-                    <input type="text" id="patient-search"
-                           class="form-control border-start-0"
-                           placeholder="Cari pasien berdasarkan nama atau No. RM..."
-                           autocomplete="off">
-                </div>
-                <div id="patient-results"></div>
-                <input type="hidden" name="patient_id" id="patient-id-input">
-                <div id="patient-selected"></div>
-            @endif
-        </div>
-    </div> --}}
-
 
     Pilih Pasien
     {{-- Pilih Pasien --}}
@@ -139,24 +90,6 @@
         </div>
         <div class="card-body p-3">
             {{-- Paket --}}
-            {{-- @foreach($packages as $pkg)
-            <div class="form-check mb-2 p-2 rounded"
-                 style="background:#f8f9fa;border:1px solid #eee;">
-                <input class="form-check-input" type="checkbox"
-                       id="pkg{{ $pkg->id }}"
-                       onchange="addItem('package', {{ $pkg->id }}, '{{ addslashes($pkg->nama) }}', {{ $pkg->harga }}, this)">
-                <label class="form-check-label d-flex justify-content-between w-100"
-                       for="pkg{{ $pkg->id }}" style="cursor:pointer;">
-                    <span>
-                        <span class="badge bg-success-subtle text-success me-1">Paket</span>
-                        {{ $pkg->nama }}
-                    </span>
-                    <span class="fw-bold" style="color:var(--orange);">
-                        Rp {{ number_format($pkg->harga, 0, ',', '.') }}
-                    </span>
-                </label>
-            </div>
-            @endforeach --}}
 {{-- Paket --}}
             @foreach($packages as $pkg)
             <div class="mb-2 rounded" style="border:1px solid #e0e0e0;overflow:hidden;">
@@ -216,20 +149,6 @@
             <hr class="my-2">
 
             {{-- Layanan Satuan --}}
-            {{-- @foreach($services as $svc)
-            <div class="form-check mb-1">
-                <input class="form-check-input" type="checkbox"
-                       id="svc{{ $svc->id }}"
-                       onchange="addItem('service', {{ $svc->id }}, '{{ addslashes($svc->nama) }}', {{ $svc->harga }}, this)">
-                <label class="form-check-label d-flex justify-content-between w-100"
-                       for="svc{{ $svc->id }}" style="cursor:pointer;font-size:13px;">
-                    <span>{{ $svc->nama }}</span>
-                    <span style="color:var(--orange);">
-                        Rp {{ number_format($svc->harga, 0, ',', '.') }}
-                    </span>
-                </label>
-            </div>
-            @endforeach --}}
 
             {{-- Layanan Satuan --}}
             @foreach($services as $svc)
@@ -429,8 +348,6 @@
 // }
 // let items     = {};
 // let subtotal  = 0;
-
-
 
 let items    = {};
 let subtotal = 0;

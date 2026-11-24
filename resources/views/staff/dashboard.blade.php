@@ -141,25 +141,6 @@
                 <div class="fw-semibold mb-3" style="font-size:13px;color:#555;">
                     <i class="bi bi-lightning-fill me-2" style="color:var(--kuning);"></i>
                     Aksi Cepat
-                {{-- </div>
-                <div class="d-flex flex-wrap gap-2">
-                    <a href="{{ route('staff.patients.create') }}"
-                       class="btn btn-primary">
-                        <i class="bi bi-person-plus-fill me-2"></i>Daftarkan Pasien
-                    </a>
-                    <a href="{{ route('staff.medical-records.create') }}"
-                       class="btn btn-success">
-                        <i class="bi bi-clipboard2-pulse-fill me-2"></i>Input Pemeriksaan
-                    </a>
-                    <a href="{{ route('staff.transactions.create') }}"
-                       class="btn btn-warning fw-semibold">
-                        <i class="bi bi-cart-plus-fill me-2"></i>Buat Transaksi
-                    </a>
-                    <a href="{{ route('staff.patients.index') }}"
-                       class="btn btn-outline-primary">
-                        <i class="bi bi-search me-2"></i>Cari Pasien
-                    </a>
-                </div> --}}
                 <div class="d-flex flex-wrap gap-2">
                     <a href="{{ route('staff.patients.create') }}"
                        class="btn btn-primary">

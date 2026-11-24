@@ -9,21 +9,6 @@ class MedicalRecord extends Model
 {
     use HasFactory;
 
-    // protected $fillable = [
-    //     'patient_id',
-    //     'user_id',
-    //     'gula_darah',
-    //     'kolesterol',
-    //     'asam_urat',
-    //     'tensi_sistolik',
-    //     'tensi_diastolik',
-    //     'suhu',
-    //     'nadi',
-    //     'respirasi',
-    //     'catatan',
-    //     'tanggal_periksa',
-    // ];
-
 protected $fillable = [
     'patient_id',
     'user_id',
@@ -49,7 +34,6 @@ protected $fillable = [
 
     'custom_data',
 ];
-
 
     protected function casts(): array
     {
@@ -118,7 +102,6 @@ protected $fillable = [
         if ($this->tensi_sistolik <= 139 || $this->tensi_diastolik <= 89) return 'Prehipertensi';
         return 'Hipertensi';
     }
-
 
     public function kategoriBmi(): string
 {

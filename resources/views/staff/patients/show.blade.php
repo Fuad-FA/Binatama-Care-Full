@@ -4,7 +4,6 @@
 
 @section('content')
 
-
 @php
     use Illuminate\Support\Str;
 @endphp
@@ -67,112 +66,14 @@
 </div>
 
 {{-- Tombol Aksi --}}
-{{-- <div class="d-flex gap-2 mb-4">
-    <a href="{{ route('staff.medical-records.create') }}?patient_id={{ $patient->id }}"
-       class="btn btn-success">
-        <i class="bi bi-clipboard2-pulse-fill me-2"></i>Input Pemeriksaan Baru
-    </a>
-    <a href="{{ route('staff.patients.edit', $patient) }}"
-       class="btn btn-outline-primary">
-        <i class="bi bi-pencil me-2"></i>Edit Data Pasien
-    </a>
-    <a href="{{ route('staff.patients.index') }}"
-       class="btn btn-outline-secondary ms-auto">
-        <i class="bi bi-arrow-left me-2"></i>Kembali
-    </a>
-</div> --}}
 
 {{-- Tombol Aksi --}}
-{{-- <div class="d-flex gap-2 mb-4 flex-wrap">
-    <a href="{{ route('staff.medical-records.create') }}?patient_id={{ $patient->id }}"
-       class="btn btn-success">
-        <i class="bi bi-clipboard2-pulse-fill me-2"></i>Input Pemeriksaan Baru
-    </a>
-    <a href="{{ route('staff.transactions.create') }}?patient_id={{ $patient->id }}"
-       class="btn btn-warning fw-semibold">
-        <i class="bi bi-cart-plus-fill me-2"></i>Buat Transaksi
-    </a>
-    <a href="{{ route('staff.patients.edit', $patient) }}"
-       class="btn btn-outline-primary">
-        <i class="bi bi-pencil me-2"></i>Edit Data
-    </a> --}}
 
     {{-- Tombol Aksi --}}
-{{-- <div class="d-flex gap-2 mb-4 flex-wrap">
-    <a href="{{ route('staff.transactions.create') }}?patient_id={{ $patient->id }}"
-       class="btn btn-success fw-semibold">
-        <i class="bi bi-cart-plus-fill me-2"></i>Transaksi & Pemeriksaan
-    </a>
-    <a href="{{ route('staff.patients.edit', $patient) }}"
-       class="btn btn-outline-primary">
-        <i class="bi bi-pencil me-2"></i>Edit Data
-    </a> --}}
-
 
     {{-- Tombol Aksi --}}
-{{-- <div class="d-flex gap-2 mb-4 flex-wrap">
-    <a href="{{ route('staff.transactions.create') }}?patient_id={{ $patient->id }}"
-       class="btn btn-success fw-semibold">
-        <i class="bi bi-cart-plus-fill me-2"></i>Transaksi & Pemeriksaan
-    </a>
-    <a href="{{ route('staff.patients.edit', $patient) }}"
-       class="btn btn-outline-primary">
-        <i class="bi bi-pencil me-2"></i>Edit Data
-    </a>
-    @if(auth()->user()->role === 'admin')
-    <form action="{{ route('staff.patients.destroy', $patient) }}"
-          method="POST" class="d-inline ms-auto">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-outline-danger"
-                onclick="return confirm('Hapus data pasien {{ $patient->nama }}?\n\nTindakan ini tidak bisa dibatalkan!')">
-            <i class="bi bi-trash me-2"></i>Hapus Pasien
-        </button>
-    </form>
-    @else
-    <a href="{{ route('staff.patients.index') }}"
-       class="btn btn-outline-secondary ms-auto">
-        <i class="bi bi-arrow-left me-2"></i>Kembali
-    </a>
-    @endif
-</div>
-    {{-- Tombol Hapus — hanya admin --}}
-    {{-- @if(auth()->user()->role === 'admin')
-    <form action="{{ route('staff.patients.destroy', $patient) }}"
-          method="POST" class="d-inline ms-auto">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-outline-danger"
-                onclick="return confirm('Hapus data pasien {{ $patient->nama }}?\n\nTindakan ini tidak bisa dibatalkan!')">
-            <i class="bi bi-trash me-2"></i>Hapus Pasien
-        </button>
-    </form>
-    @else
-    <a href="{{ route('staff.patients.index') }}"
-       class="btn btn-outline-secondary ms-auto">
-        <i class="bi bi-arrow-left me-2"></i>Kembali
-    </a>
-    @endif
-</div> --}}
 
     {{-- Tombol Hapus — hanya admin --}}
-    {{-- @if(auth()->user()->role === 'admin')
-    <form action="{{ route('staff.patients.destroy', $patient) }}"
-          method="POST" class="d-inline ms-auto">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-outline-danger"
-                onclick="return confirm('Hapus data pasien {{ $patient->nama }}?\n\nTindakan ini tidak bisa dibatalkan!')">
-            <i class="bi bi-trash me-2"></i>Hapus Pasien
-        </button>
-    </form>
-    @else
-    <a href="{{ route('staff.patients.index') }}"
-       class="btn btn-outline-secondary ms-auto">
-        <i class="bi bi-arrow-left me-2"></i>Kembali
-    </a>
-    @endif
-</div> --}}
 
 {{-- Tombol Aksi --}}
 <div class="d-flex gap-2 mb-4 flex-wrap align-items-center">
@@ -237,8 +138,6 @@
                     <th style="font-size:12px;color:#888;font-weight:600;">GULA DARAH</th>
                     <th style="font-size:12px;color:#888;font-weight:600;">KOLESTEROL</th>
                     <th style="font-size:12px;color:#888;font-weight:600;">ASAM URAT</th>
-                    {{-- <th style="font-size:12px;color:#888;font-weight:600;">TENSI</th>
-                    <th style="font-size:12px;color:#888;font-weight:600;">PETUGAS</th> --}}
                     <th style="font-size:12px;color:#888;font-weight:600;">TENSI</th>
                     <th style="font-size:12px;color:#888;font-weight:600;">DATA TAMBAHAN</th>
                     <th style="font-size:12px;color:#888;font-weight:600;">BMI</th>
@@ -293,21 +192,6 @@
                         @endif
                     </td>
                     {{-- Tensi --}}
-                    {{-- <td>
-                        @if($rec->tensi_sistolik)
-                            <span class="fw-semibold
-                                {{ $rec->statusTensi() === 'Normal' ? 'text-success' :
-                                   ($rec->statusTensi() === 'Prehipertensi' ? 'text-warning' : 'text-danger') }}">
-                                {{ $rec->tensi_sistolik }}/{{ $rec->tensi_diastolik }} mmHg
-                            </span>
-                        @else
-                            <span class="text-muted">-</span>
-                        @endif
-                    </td>
-                    <td style="font-size:12px;color:#888;">
-                        {{ $rec->user?->name ?? '-' }}
-                    </td> --}}
-
 
                     {{-- Tensi --}}
 <td>
@@ -374,7 +258,6 @@
                 </tr>
                 @empty
                 <tr>
-                    {{-- <td colspan="6" class="text-center py-4 text-muted"> --}}
                         <td colspan="9" class="text-center py-4 text-muted">
                         <i class="bi bi-clipboard2 d-block mb-1 opacity-25 fs-3"></i>
                         Belum ada riwayat pemeriksaan.

@@ -53,7 +53,7 @@ class HargaStokTest extends TestCase
         $this->assertEquals(0, Transaction::count());
         $this->assertEquals(5, Product::find($this->prod->id)->stok);
         $r->assertSessionHas('error');
-        fwrite(STDERR, "\nPESAN: " . session('error') . "\n");
+        
     }
 
     public function test_produk_sama_di_dua_baris_dijumlahkan(): void

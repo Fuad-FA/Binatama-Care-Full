@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 
-
-
 // ============================================================
 // LANDING PAGES
 // ============================================================
@@ -31,17 +29,6 @@ Route::get('/student', function() {
 // ============================================================
 // PUBLIK — Halaman Login
 // ============================================================
-// Route::get('/', fn() => redirect()->route('login'));
-
-// Route::get('/login', [LoginController::class, 'showForm'])->name('login');
-// Route::post('/login', [LoginController::class, 'login'])->name('login.post');
-// Route::post('/login/qrcode', [LoginController::class, 'loginQR'])->name('login.qr');
-// Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
-
-// Route::get('/ganti-password', [LoginController::class, 'showChangePassword'])
-//     ->name('password.change')->middleware('auth');
-// Route::post('/ganti-password', [LoginController::class, 'updatePassword'])
-//     ->name('password.update')->middleware('auth');
 
 // Root redirect ke 404
 Route::get('/', fn() => abort(404));
@@ -138,35 +125,12 @@ Route::middleware(['auth', 'role:admin'])
             Route::get('/reports/export', [\App\Http\Controllers\Admin\ReportController::class, 'export'])
             ->name('reports.export');
 
-
             Route::post('/users/{user}/unlock', [\App\Http\Controllers\Admin\UserController::class, 'unlock'])
             ->name('users.unlock');
 
             Route::get('/activity-log', [\App\Http\Controllers\Admin\ActivityLogController::class, 'index'])
             ->name('activity-log');
 
-            // Ganti Password Admin (3 step + OTP)
-        // Route::get('/ganti-password',
-        //     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'showStep1'])
-        //     ->name('admin.password.step1');
-        // Route::post('/ganti-password/verifikasi',
-        //     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'verifyOldPassword'])
-        //     ->name('admin.password.verify-old');
-        // Route::get('/ganti-password/otp',
-        //     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'showStep2'])
-        //     ->name('admin.password.step2');
-        // Route::post('/ganti-password/otp/verifikasi',
-        //     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'verifyOtp'])
-        //     ->name('admin.password.verify-otp');
-        // Route::get('/ganti-password/baru',
-        //     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'showStep3'])
-        //     ->name('admin.password.step3');
-        // Route::post('/ganti-password/baru',
-        //     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'updatePassword'])
-        //     ->name('admin.password.update');
-        // Route::post('/ganti-password/kirim-ulang',
-        //     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'resendOtp'])
-        //     ->name('admin.password.resend');
         Route::get('/ganti-password',
     [\App\Http\Controllers\Admin\AdminPasswordController::class, 'showStep1'])
     ->name('password.step1'); // <-- Cukup tulis password.step1
@@ -223,24 +187,6 @@ Route::middleware(['auth', 'role:admin,guru,siswa', 'check.first.login'])
            
     });
 
-// ============================================================
-// PORTAL PASIEN
-// ============================================================
-// Route::prefix('portal')->name('patient.')->group(function () {
-//     Route::get('/', [\App\Http\Controllers\Patient\PortalController::class, 'showLogin'])
-//         ->name('login');
-//     Route::post('/login', [\App\Http\Controllers\Patient\PortalController::class, 'login'])
-//         ->name('login.post');
-//     Route::post('/logout', [\App\Http\Controllers\Patient\PortalController::class, 'logout'])
-//         ->name('logout')->middleware('patient.auth');
-
-//     Route::middleware('patient.auth')->group(function () {
-//         Route::get('/dashboard', [\App\Http\Controllers\Patient\PortalController::class, 'dashboard'])
-//             ->name('dashboard');
-//         Route::get('/riwayat', [\App\Http\Controllers\Patient\PortalController::class, 'records'])
-//             ->name('records');
-//     });
-// });
 // ============================================================
 // PORTAL PASIEN
 // ============================================================

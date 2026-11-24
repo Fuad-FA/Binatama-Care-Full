@@ -81,31 +81,6 @@ class Transaction extends Model
         return 'Rp ' . number_format($this->total, 0, ',', '.');
     }
 
-
-
-//     public function needsMedicalRecord(): bool
-// {
-//     $itemNames = $this->items->pluck('nama_item')->toArray();
-//     $builtIn   = \App\Services\MedicalFieldResolver::getBuiltInFields($itemNames);
-//     $custom    = \App\Services\MedicalFieldResolver::getCustomFields($this->items);
-
-//     return !empty($builtIn) || $custom->isNotEmpty();
-// }
-
-// public function needsMedicalRecord(): bool
-// {
-//     // Pastikan relasi items sudah ter-load
-//     if (!$this->relationLoaded('items')) {
-//         $this->load('items');
-//     }
-
-//     $itemNames = $this->items->pluck('nama_item')->toArray();
-//     $builtIn   = \App\Services\MedicalFieldResolver::getBuiltInFields($itemNames);
-//     $custom    = \App\Services\MedicalFieldResolver::getCustomFields($this->items);
-
-//     return !empty($builtIn) || $custom->isNotEmpty();
-// }
-
 public function needsMedicalRecord(): bool
 {
     // Pastikan relasi items sudah ter-load
@@ -131,20 +106,4 @@ public function getMedicalFieldsString(): string
     return implode(',', \App\Services\MedicalFieldResolver::getBuiltInFields($itemNames));
 }
 
-// public function getMedicalFieldsString(): string
-// {
-//     // Pastikan relasi items sudah ter-load
-//     if (!$this->relationLoaded('items')) {
-//         $this->load('items');
-//     }
-
-//     $itemNames = $this->items->pluck('nama_item')->toArray();
-//     return implode(',', \App\Services\MedicalFieldResolver::getBuiltInFields($itemNames));
-// }
-
-// public function getMedicalFieldsString(): string
-// {
-//     $itemNames = $this->items->pluck('nama_item')->toArray();
-//     return implode(',', \App\Services\MedicalFieldResolver::getBuiltInFields($itemNames));
-// }
 }

@@ -215,13 +215,6 @@
             <span class="badge badge-{{ auth()->user()->role }} px-3 py-2">
                 {{ ucfirst(auth()->user()->role) }}
             </span>
-            {{-- <form action="{{ route('logout') }}" method="POST" class="mb-0">
-                @csrf
-                <button type="submit" class="btn btn-sm btn-outline-danger">
-                    <i class="bi bi-box-arrow-right"></i>
-                    <span class="d-none d-md-inline">Logout</span>
-                </button>
-            </form> --}}
             <form action="{{ route('logout') }}" method="POST" id="logout-form">
     @csrf
     <button type="button"

@@ -61,11 +61,6 @@ class ServiceController extends Controller
             ->with('success', 'Layanan ' . $service->nama . ' berhasil ditambahkan!');
     }
 
-    // public function edit(Service $service)
-    // {
-    //     return view('admin.services.edit', compact('service'));
-    // }
-
 public function edit(Service $service)
 {
     $service->load('fields');
@@ -75,13 +70,6 @@ public function edit(Service $service)
 
     public function update(Request $request, Service $service)
     {
-        // $request->validate([
-        //     'kode'         => ['required','string','max:20',
-        //                        Rule::unique('services')->ignore($service->id)],
-        //     'nama'         => 'required|string|max:100',
-        //     'harga'        => 'required|numeric|min:0',
-        //     'durasi_menit' => 'nullable|integer|min:1',
-        // ]);
 
 $request->validate([
     'kode' => [
@@ -131,8 +119,6 @@ $request->validate([
         return redirect()->back()
             ->with('success', 'Layanan ' . $service->nama . ' berhasil ' . $status . '.');
     }
-
-
 
     private function syncServiceFields(Service $service, array $fields): void
 {

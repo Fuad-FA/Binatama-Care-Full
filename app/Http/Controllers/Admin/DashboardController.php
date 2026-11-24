@@ -58,16 +58,6 @@ class DashboardController extends Controller
         }
 
         // Top 5 staf paling aktif bulan ini
-        // $topStaf = User::where('role', '!=', 'admin')
-        //     ->withCount([
-        //         'patients as pasien_count' => fn($q) =>
-        //             $q->whereMonth('created_at', $bulan)->whereYear('created_at', $tahun),
-        //         'transactions as trx_count' => fn($q) =>
-        //             $q->whereMonth('created_at', $bulan)->whereYear('created_at', $tahun),
-        //     ])
-        //     ->orderByDesc('trx_count')
-        //     ->limit(5)
-        //     ->get();
 $topStaf = User::where('role', '!=', 'admin')
     ->withCount([
         'patients as pasien_count' => fn($q) =>
@@ -93,7 +83,6 @@ $topStaf = User::where('role', '!=', 'admin')
     ->orderByDesc('locked_at')
     ->get();
 
-
 // Produk dengan stok menipis (stok <= 10)
         $stokMenipis = \App\Models\Product::where('is_active', true)
             ->where('stok', '<=', 10)
@@ -105,7 +94,6 @@ $topStaf = User::where('role', '!=', 'admin')
         $stokHabis = \App\Models\Product::where('is_active', true)
             ->where('stok', 0)
             ->get();
-
 
             // Activity log terbaru
         $activityLogs = \App\Models\ActivityLog::with('user')

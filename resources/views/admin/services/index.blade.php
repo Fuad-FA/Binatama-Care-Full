@@ -49,7 +49,6 @@
                             {{ $service->kode }}
                         </code>
                     </td>
-                    {{-- <td class="fw-semibold" style="font-size:14px;">{{ $service->nama }}</td> --}}
 
                     <td>
     <div class="fw-semibold" style="font-size:14px;">
@@ -64,9 +63,6 @@
         </span>
     @endif
 </td>
-                    {{-- <td style="color:var(--orange);font-weight:600;">
-                        {{ $service->harga > 0 ? $service->hargaFormatted() : '<span class="text-muted fw-normal" style="font-size:12px;">Gratis / Termasuk paket</span>' }}
-                    </td> --}}
                     <td>
                         @if($service->harga > 0)
                             <span style="color:var(--orange);font-weight:600;">

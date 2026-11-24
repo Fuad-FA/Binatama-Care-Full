@@ -42,47 +42,6 @@ class UserController extends Controller
     }
 
     // Simpan user baru
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'name'     => 'required|string|max:100',
-    //         'username' => 'required|string|max:50|unique:users|alpha_dash',
-    //         'email'    => 'nullable|email|unique:users',
-    //         'password' => 'required|string|min:6',
-    //         'role'     => 'required|in:guru,siswa',
-    //         'jabatan'  => 'nullable|string|max:100',
-    //         'barcode'  => 'nullable|string|unique:users',
-    //     ], [
-    //         'name.required'     => 'Nama wajib diisi.',
-    //         'username.required' => 'Username wajib diisi.',
-    //         'username.unique'   => 'Username sudah digunakan.',
-    //         'username.alpha_dash' => 'Username hanya boleh huruf, angka, - dan _.',
-    //         'password.min'      => 'Password minimal 6 karakter.',
-    //         'role.required'     => 'Role wajib dipilih.',
-    //     ]);
-
-    //     $user = User::create([
-    //         'name'                 => $request->name,
-    //         'username'             => strtolower($request->username),
-    //         'email'                => $request->email,
-    //         'password'             => Hash::make($request->password),
-    //         'role'                 => $request->role,
-    //         'jabatan'              => $request->jabatan,
-    //         'barcode'              => $request->barcode,
-    //         'is_active'            => true,
-    //         'must_change_password' => $request->role === 'siswa',
-    //     ]);
-
-    //     ActivityLog::create([
-    //         'user_id'     => auth()->id(),
-    //         'action'      => 'create_user',
-    //         'description' => 'Membuat akun baru: ' . $user->name . ' (' . $user->role . ')',
-    //         'ip_address'  => $request->ip(),
-    //     ]);
-
-    //     return redirect()->route('admin.users.index')
-    //         ->with('success', 'Akun ' . $user->name . ' berhasil dibuat!');
-    // }
 
     public function store(Request $request)
 {
@@ -145,51 +104,6 @@ class UserController extends Controller
     }
 
     // Update user
-    // public function update(Request $request, User $user)
-    // {
-    //     if ($user->role === 'admin') abort(403);
-
-    //     $request->validate([
-    //         'name'     => 'required|string|max:100',
-    //         'username' => ['required','string','max:50','alpha_dash',
-    //                        Rule::unique('users')->ignore($user->id)],
-    //         'email'    => ['nullable','email',
-    //                        Rule::unique('users')->ignore($user->id)],
-    //         'role'     => 'required|in:guru,siswa',
-    //         'jabatan'  => 'nullable|string|max:100',
-    //         'barcode'  => ['nullable','string',
-    //                        Rule::unique('users')->ignore($user->id)],
-    //         'password' => 'nullable|string|min:6',
-    //     ]);
-
-    //     $data = [
-    //         'name'      => $request->name,
-    //         'username'  => strtolower($request->username),
-    //         'email'     => $request->email,
-    //         'role'      => $request->role,
-    //         'jabatan'   => $request->jabatan,
-    //         'barcode'   => $request->barcode,
-    //         'is_active' => $request->boolean('is_active', true),
-    //     ];
-
-    //     // Hanya update password jika diisi
-    //     if ($request->filled('password')) {
-    //         $data['password']             = Hash::make($request->password);
-    //         $data['must_change_password'] = false;
-    //     }
-
-    //     $user->update($data);
-
-    //     ActivityLog::create([
-    //         'user_id'     => auth()->id(),
-    //         'action'      => 'update_user',
-    //         'description' => 'Mengupdate akun: ' . $user->name,
-    //         'ip_address'  => $request->ip(),
-    //     ]);
-
-    //     return redirect()->route('admin.users.index')
-    //         ->with('success', 'Akun ' . $user->name . ' berhasil diperbarui!');
-    // }
 
     public function update(Request $request, User $user)
 {
@@ -334,7 +248,6 @@ public function unlock(User $user)
 
     return back()->with('success', 'Akun ' . $user->name . ' berhasil dibuka!');
 }
-
 
 private function exportXlsx($users, string $filename, string $roleLabel)
 {

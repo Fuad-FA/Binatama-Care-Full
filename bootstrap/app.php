@@ -11,6 +11,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // Aplikasi berjalan di belakang Cloudflare Tunnel dan Docker. Percayai header X-Forwarded-*
+        // hanya dari jaringan privat (gateway Docker, localhost, LAN) agar IP pengunjung dan skema https terbaca benar.
+        $middleware->trustProxies(
+            at: ['127.0.0.1', '10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16'],
+            headers: \Illuminate\Http\Request::HEADER_X_FORWARDED_FOR
+                | \Illuminate\Http\Request::HEADER_X_FORWARDED_PORT
+                | \Illuminate\Http\Request::HEADER_X_FORWARDED_PROTO,
+        );
+
         $middleware->alias([
             'role'              => \App\Http\Middleware\RoleMiddleware::class,
             'check.first.login' => \App\Http\Middleware\CheckFirstLogin::class,

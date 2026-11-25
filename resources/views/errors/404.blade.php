@@ -127,17 +127,19 @@
                 <i class="bi bi-speedometer2 me-2"></i>Dashboard
             </a>
         @endif
-    @else
+        @else
         <div class="deskripsi mb-2">Masuk sebagai:</div>
-        <a href="{{ route('landing.pasien') }}" class="btn-home">
-            <i class="bi bi-person-heart me-2"></i>Pasien
-        </a>
-        <a href="{{ route('landing.guru') }}" class="btn-home">
-            <i class="bi bi-mortarboard-fill me-2"></i>Guru
-        </a>
-        <a href="{{ route('landing.siswa') }}" class="btn-home">
-            <i class="bi bi-person-badge-fill me-2"></i>Siswa
-        </a>
+        <div class="d-grid gap-2 mx-auto" style="max-width:220px;">
+            <a href="{{ route('landing.pasien') }}" class="btn-home">
+                <i class="bi bi-person-heart me-2"></i>Pasien
+            </a>
+            <a href="{{ route('landing.guru') }}" class="btn-home">
+                <i class="bi bi-mortarboard-fill me-2"></i>Guru
+            </a>
+            <a href="{{ route('landing.siswa') }}" class="btn-home">
+                <i class="bi bi-person-badge-fill me-2"></i>Siswa
+            </a>
+        </div>
     @endauth
 
     <div class="brand">

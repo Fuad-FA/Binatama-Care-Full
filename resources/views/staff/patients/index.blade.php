@@ -103,47 +103,8 @@
                             {{ $patient->medicalRecords->count() }} kali
                         </span>
                     </td>
-                    {{-- <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('staff.patients.show', $patient) }}"
-                               class="btn btn-sm btn-primary">
-                                <i class="bi bi-eye me-1"></i>Detail
-                            </a>
-                            <a href="{{ route('staff.medical-records.create') }}?patient_id={{ $patient->id }}"
-                               class="btn btn-sm btn-outline-success"
-                               title="Input Pemeriksaan Baru">
-                                <i class="bi bi-clipboard2-pulse"></i>
-                            </a>
-                        </div>
-                    </td> --}}
 
-{{-- <td>
-                        <div class="d-flex gap-1">
-                            <a href="{{ route('staff.patients.show', $patient) }}"
-                               class="btn btn-sm btn-primary">
-                                <i class="bi bi-eye me-1"></i>Detail
-                            </a>
-                            <a href="{{ route('staff.medical-records.create') }}?patient_id={{ $patient->id }}"
-                               class="btn btn-sm btn-outline-success"
-                               title="Input Pemeriksaan Baru">
-                                <i class="bi bi-clipboard2-pulse"></i>
-                            </a> --}}
                             {{-- Hapus hanya untuk admin --}}
-                            {{-- @if(auth()->user()->role === 'admin')
-                            <form action="{{ route('staff.patients.destroy', $patient) }}"
-                                  method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                        class="btn btn-sm btn-outline-danger"
-                                        title="Hapus Pasien"
-                                        onclick="return confirm('Hapus pasien {{ $patient->nama }}?')">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </form>
-                            @endif
-                        </div>
-                    </td> --}}
 
 <td>
                         <div class="d-flex gap-1">
@@ -172,7 +133,6 @@
                             @endif
                         </div>
                     </td>
-
 
                 </tr>
                 @empty

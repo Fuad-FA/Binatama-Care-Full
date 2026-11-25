@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Siswa — SIK Rumah Sehat Binatama</title>
+    <title>Login Siswa — Binatama Care</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
@@ -86,7 +86,7 @@
         <div class="icon-box">
             <i class="bi bi-qr-code-scan fs-3" style="color:var(--biru-muda);"></i>
         </div>
-        <h4>Rumah Sehat Binatama</h4>
+        <h4>Binatama Care</h4>
         <p>SMK Kesehatan Binatama Yogyakarta</p>
     </div>
     <div class="login-body">

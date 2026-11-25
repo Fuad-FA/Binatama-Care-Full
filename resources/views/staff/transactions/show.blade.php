@@ -136,62 +136,10 @@
 
 {{-- Tombol Aksi --}}
 <div class="d-flex gap- flex-wrap">
-    {{-- <a href="{{ route('staff.transactions.nota', $transaction) }}"
-       target="_blank" class="btn btn-success px-4 fw-semibold">
-        <i class="bi bi-printer-fill me-2"></i>Cetak Nota PDF
-    </a>
-    <a href="{{ route('staff.transactions.index') }}"
-       class="btn btn-outline-secondary px-4">
-        <i class="bi bi-arrow-left me-2"></i>Kembali
-    </a>
-    <a href="{{ route('staff.transactions.create') }}?patient_id={{ $transaction->patient_id }}"
-       class="btn btn-primary px-4 ms-auto">
-        <i class="bi bi-plus-circle me-2"></i>Transaksi Baru
-    </a> --}}
-    {{-- @php
-        // Cek apakah transaksi ini perlu rekam medis
-        $itemNamesShow = $transaction->items->pluck('nama_item')->toArray();
-        $needsMedical  = false;
-        $medKeywords   = ['gula','kolesterol','asam urat','tekanan','tensi','suhu','nadi',
-                          'respirasi','bmi','antropometri','pijat','totok','infra red','senam','paket sehat'];
-        foreach ($itemNamesShow as $n) {
-            foreach ($medKeywords as $kw) {
-                if (str_contains(strtolower($n), $kw)) {
-                    $needsMedical = true;
-                    break 2;
-                }
-            }
-        }
-    @endphp --}}
-
-    {{-- @php
-    $itemNamesShow = $transaction->items->pluck('nama_item')->toArray();
-
-    // Whitelist EKSAK layanan yang memerlukan rekam medis
-    $medicalServices = [
-        'cek gula darah', 'cek kolesterol', 'cek asam urat',
-        'cek tekanan darah', 'cek suhu', 'cek nadi', 'cek respirasi',
-        'paket sehat 1', 'paket sehat 2', 'paket sehat 3',
-        'paket sehat 4', 'paket sehat 5',
-    ];
-
-    $needsMedical = false;
-    foreach ($itemNamesShow as $n) {
-        $nl = strtolower(trim($n));
-        foreach ($medicalServices as $ms) {
-            if ($nl === $ms || str_contains($nl, $ms)) {
-                $needsMedical = true;
-                break 2;
-            }
-        }
-    }
-@endphp --}}
 
 @php
     $needsMedicalNow = $transaction->needsMedicalRecord();
 @endphp
-
-    {{-- @if(!$needsMedical || $transaction->medical_record_id) --}}
 
     @if(!$needsMedicalNow || $transaction->medical_record_id)
         {{-- Rekam medis sudah ada atau tidak diperlukan — bisa cetak --}}
@@ -201,35 +149,6 @@
         </a>
     @else
         {{-- Rekam medis belum diisi — tombol menuju form rekam medis --}}
-        {{-- @php
-            $fieldsShow = [];
-            $mappingShow = [
-                'gula_darah'   => ['cek gula','gula darah'],
-                'kolesterol'   => ['cek kolesterol','kolesterol'],
-                'asam_urat'    => ['cek asam urat','asam urat'],
-                'tensi'        => ['cek tekanan darah','tekanan darah','tensi'],
-                'suhu'         => ['cek suhu','suhu tubuh'],
-                'nadi'         => ['cek nadi','nadi'],
-                'respirasi'    => ['cek respirasi','respirasi'],
-                'antropometri' => ['cek bmi','antropometri','bmi'],
-            ];
-            $allVitalsShow = ['paket sehat','sehat 1','sehat 2','sehat 3','sehat 4','sehat 5','pijat','totok','infra red','senam'];
-            foreach ($itemNamesShow as $n) {
-                $nl = strtolower($n);
-                foreach ($allVitalsShow as $vs) {
-                    if (str_contains($nl, $vs)) {
-                        $fieldsShow = ['gula_darah','kolesterol','asam_urat','tensi','suhu','nadi','respirasi'];
-                        break 2;
-                    }
-                }
-                foreach ($mappingShow as $field => $kws) {
-                    foreach ($kws as $kw) {
-                        if (str_contains($nl, $kw)) { $fieldsShow[] = $field; break; }
-                    }
-                }
-            }
-            $fieldsShow = array_unique($fieldsShow);
-        @endphp --}}
         <a href="{{ route('staff.medical-records.create', [
                         'patient_id'     => $transaction->patient_id,
                         'transaction_id' => $transaction->id,

@@ -31,10 +31,6 @@ class PatientController extends Controller
         return view('staff.patients.index', compact('patients'));
     }
 
-    // public function create()
-    // {
-    //     return view('staff.patients.create');
-    // }
     public function create(Request $request)
 {
     // Simpan flag redirect ke session jika datang dari transaksi
@@ -44,99 +40,6 @@ class PatientController extends Controller
 
     return view('staff.patients.create');
 }
-
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'nama'          => 'required|string|max:100',
-    //         'alamat'        => 'nullable|string|max:255',
-    //         'tanggal_lahir' => 'nullable|date|before:today',
-    //         'jenis_kelamin' => 'nullable|in:L,P',
-    //         'telepon'       => 'nullable|string|max:20',
-    //     ], [
-    //         'nama.required'          => 'Nama pasien wajib diisi.',
-    //         'tanggal_lahir.before'   => 'Tanggal lahir tidak valid.',
-    //     ]);
-
-    //     $patient = Patient::create([
-    //         'nama'          => $request->nama,
-    //         'alamat'        => $request->alamat,
-    //         'tanggal_lahir' => $request->tanggal_lahir,
-    //         'jenis_kelamin' => $request->jenis_kelamin,
-    //         'telepon'       => $request->telepon,
-    //         'created_by'    => auth()->id(),
-    //     ]);
-
-    //     ActivityLog::create([
-    //         'user_id'     => auth()->id(),
-    //         'action'      => 'create_patient',
-    //         'description' => 'Input pasien baru: ' . $patient->nama . ' (' . $patient->no_rm . ')',
-    //         'ip_address'  => $request->ip(),
-    //     ]);
-
-    //     return redirect()->route('staff.patients.show', $patient)
-    //         ->with('success', 'Pasien ' . $patient->nama . ' berhasil didaftarkan! No. RM: ' . $patient->no_rm);
-    // }
-
-
-// public function store(Request $request)
-// {
-//     $request->validate([
-//         'nama'          => 'required|string|max:100',
-//         'alamat'        => 'nullable|string|max:255',
-//         'tanggal_lahir' => 'nullable|date|before:today',
-//         'jenis_kelamin' => 'nullable|in:L,P',
-//         'telepon'       => 'nullable|string|max:20',
-//     ], [
-//         'nama.required'        => 'Nama pasien wajib diisi.',
-//         'tanggal_lahir.before' => 'Tanggal lahir tidak valid.',
-//     ]);
-
-//     // Cek duplikasi: nama + tanggal lahir sama
-//     if ($request->filled('tanggal_lahir')) {
-//         $existing = Patient::where('nama', $request->nama)
-//             ->where('tanggal_lahir', $request->tanggal_lahir)
-//             ->first();
-
-//         if ($existing) {
-//             return back()->withInput()
-//                 ->with('error_duplikat', $existing)
-//                 ->with('error', 'Pasien dengan nama dan tanggal lahir yang sama sudah terdaftar!');
-//         }
-//     }
-
-//     // Cek duplikasi: nama + telepon sama
-//     if ($request->filled('telepon')) {
-//         $existing = Patient::where('nama', $request->nama)
-//             ->where('telepon', $request->telepon)
-//             ->first();
-
-//         if ($existing) {
-//             return back()->withInput()
-//                 ->with('error_duplikat', $existing)
-//                 ->with('error', 'Pasien dengan nama dan telepon yang sama sudah terdaftar!');
-//         }
-//     }
-
-//     $patient = Patient::create([
-//         'nama'          => $request->nama,
-//         'alamat'        => $request->alamat,
-//         'tanggal_lahir' => $request->tanggal_lahir,
-//         'jenis_kelamin' => $request->jenis_kelamin,
-//         'telepon'       => $request->telepon,
-//         'created_by'    => auth()->id(),
-//     ]);
-
-//     ActivityLog::create([
-//         'user_id'     => auth()->id(),
-//         'action'      => 'create_patient',
-//         'description' => 'Input pasien baru: ' . $patient->nama . ' (' . $patient->no_rm . ')',
-//         'ip_address'  => $request->ip(),
-//     ]);
-
-//     return redirect()->route('staff.patients.show', $patient)
-//         ->with('success', 'Pasien ' . $patient->nama . ' berhasil didaftarkan! No. RM: ' . $patient->no_rm);
-// }
 
 public function store(Request $request)
 {
@@ -186,17 +89,6 @@ public function store(Request $request)
         'created_by'    => auth()->id(),
     ]);
 
-    // ActivityLog::create([
-    //     'user_id'     => auth()->id(),
-    //     'action'      => 'create_patient',
-    //     'description' => 'Input pasien baru: ' . $patient->nama . ' (' . $patient->no_rm . ')',
-    //     'ip_address'  => $request->ip(),
-    // ]);
-
-//     return redirect()->route('staff.patients.show', $patient)
-//         ->with('success', 'Pasien ' . $patient->nama . ' berhasil didaftarkan! No. RM: ' . $patient->no_rm);
-// }
-
 ActivityLog::create([
     'user_id'     => auth()->id(),
     'action'      => 'create_patient',
@@ -240,8 +132,6 @@ return redirect()
     );
 }
 
-
-
     public function show(Patient $patient)
     {
         // Staf hanya bisa lihat pasien miliknya
@@ -283,11 +173,6 @@ return redirect()
             ->with('success', 'Data pasien berhasil diperbarui.');
     }
 
-    // public function destroy(Patient $patient)
-    // {
-    //     abort(403, 'Data pasien tidak dapat dihapus.');
-    // }
-
     public function destroy(Patient $patient)
 {
     // Hanya admin yang boleh hapus
@@ -313,16 +198,6 @@ return redirect()
     ]);
 
   // Response AJAX untuk form transaksi
-    // if ($request->boolean('_ajax') || $request->wantsJson()) {
-    //     return response()->json([
-    //         'success' => true,
-    //         'patient' => [
-    //             'id'    => $patient->id,
-    //             'nama'  => $patient->nama,
-    //             'no_rm' => $patient->no_rm,
-    //         ]
-    //     ]);
-    // }
 
     return redirect()->route('staff.patients.index')
         ->with('success', 'Data pasien ' . $nama . ' berhasil dihapus.');

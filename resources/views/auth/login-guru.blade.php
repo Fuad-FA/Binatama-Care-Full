@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Guru — SIK Rumah Sehat Binatama</title>
+    <title>Login Guru — Binatama Care</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
@@ -81,7 +81,7 @@
         <div class="icon-box">
             <i class="bi bi-person-badge-fill fs-3" style="color:var(--biru-tua);"></i>
         </div>
-        <h4>Rumah Sehat Binatama</h4>
+        <h4>Binatama Care</h4>
         <p>SMK Kesehatan Binatama Yogyakarta</p>
     </div>
     <div class="login-body">

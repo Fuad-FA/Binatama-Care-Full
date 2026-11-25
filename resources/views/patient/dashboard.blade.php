@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Pasien — Rumah Sehat Binatama</title>
+    <title>Dashboard Pasien — Binatama Care</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="manifest" href="/manifest.json">
@@ -119,7 +119,7 @@
 <div class="topbar d-flex align-items-center justify-content-between">
     <div>
         <div class="brand">
-            <i class="bi bi-heart-pulse-fill me-1"></i>Rumah Sehat Binatama
+            <i class="bi bi-heart-pulse-fill me-1"></i>Binatama Care
         </div>
         <div class="sub">Portal Pasien</div>
     </div>

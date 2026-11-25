@@ -22,7 +22,7 @@
 <body>
 <div class="container">
     <div class="header">
-        <h1>🏥 SIK Rumah Sehat Binatama</h1>
+        <h1>🏥 Binatama Care</h1>
         <p>SMK Kesehatan Binatama Yogyakarta</p>
     </div>
     <div class="body">
@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="footer">
-        Email ini dikirim otomatis oleh SIK Rumah Sehat Binatama.<br>
+        Email ini dikirim otomatis oleh Binatama Care.<br>
         Jangan membalas email ini.
     </div>
 </div>

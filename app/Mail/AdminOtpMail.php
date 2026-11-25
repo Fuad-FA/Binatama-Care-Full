@@ -24,7 +24,7 @@ class AdminOtpMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: '[SIK Binatama] Kode OTP Ganti Password Admin',
+            subject: '[Binatama Care] Kode OTP Ganti Password Admin',
         );
     }
 

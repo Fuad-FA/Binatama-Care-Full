@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Guru — SIK Rumah Sehat Binatama</title>
+    <title>Portal Guru — Binatama Care</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
@@ -38,7 +38,7 @@
 <div class="content-wrap">
     <div class="top-bar">
         <div>
-            <div class="brand-name"><i class="bi bi-heart-pulse-fill me-1"></i>Rumah Sehat Binatama</div>
+            <div class="brand-name"><i class="bi bi-heart-pulse-fill me-1"></i>Binatama Care</div>
             <div class="brand-sub">SMK Kesehatan Binatama Yogyakarta</div>
         </div>
         <div style="color:rgba(255,255,255,0.6);font-size:11px;">Sistem Informasi Kesehatan</div>

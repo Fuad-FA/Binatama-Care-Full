@@ -10,20 +10,6 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    // protected $fillable = [
-    //     'name',
-    //     'username',
-    //     'email',
-    //     'password',
-    //     'role',
-    //     'barcode',
-    //     'jabatan',
-    //     'is_active',
-    //     'must_change_password',
-    //     'last_login',
-        
-    // ];
-
     protected $fillable = [
     'name',
     'username',
@@ -44,17 +30,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
-    // protected function casts(): array
-    // {
-    //     return [
-    //         'email_verified_at' => 'datetime',
-    //         'last_login'        => 'datetime',
-    //         'password'          => 'hashed',
-    //         'is_active'         => 'boolean',
-    //         'must_change_password' => 'boolean',
-    //     ];
-    // }
 
 protected function casts(): array
 {

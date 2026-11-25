@@ -84,7 +84,6 @@
         </div>
     @endif
 
-    {{-- @foreach($patient->medicalRecords as $rec) --}}
     @foreach($records as $i => $rec)
     <div class="record-card">
         <div class="record-header d-flex justify-content-between align-items-center">
@@ -98,7 +97,6 @@
             </div>
             <div style="background:rgba(255,255,255,0.2);padding:4px 10px;
                         border-radius:8px;font-size:11px;">
-                {{-- Kunjungan ke-{{ $loop->iteration }} --}}
                 <span ...>Kunjungan ke-{{ $records->count() - $i }}</span>
             </div>
         </div>
@@ -186,40 +184,6 @@
 
         {{-- Setelah bagian Catatan, tambahkan BMI dan Catatan Gizi --}}
 
-{{-- @if($rec->bmi)
-<div class="d-flex justify-content-between py-2 border-bottom">
-    <span class="text-muted">BMI</span>
-    <div class="text-end">
-        <span class="fw-bold" style="color:{{ $rec->warnaBmi() }};">
-            {{ $rec->bmi }} kg/m²
-        </span>
-        <span class="badge ms-1 px-2"
-              style="background:{{ $rec->warnaBmi() }};color:#fff;font-size:10px;">
-            {{ $rec->kategoriBmi() }}
-        </span>
-    </div>
-</div>
-@endif
-
-@if($rec->berat_badan || $rec->tinggi_badan)
-<div class="d-flex justify-content-between py-2 border-bottom">
-    <span class="text-muted">Berat / Tinggi</span>
-    <span class="fw-semibold">
-        {{ $rec->berat_badan ?? '-' }} kg /
-        {{ $rec->tinggi_badan ?? '-' }} cm
-    </span>
-</div>
-@endif
-
-@if($rec->catatan_gizi)
-<div class="py-2 border-bottom">
-    <div class="text-muted mb-1">Catatan Konsultasi Gizi</div>
-    <div class="p-2 rounded" style="background:#f3e5f5;font-size:13px;color:#333;">
-        {{ $rec->catatan_gizi }}
-    </div>
-</div>
-@endif --}}
-
 @if($rec->bmi)
 <div class="result-row">
     <span style="color:#666;">BMI</span>
@@ -269,7 +233,6 @@
     @endforeach
 </div>
 @endif
-
 
 @if($rec->catatan_gizi)
 <div class="result-row" style="display:block;">

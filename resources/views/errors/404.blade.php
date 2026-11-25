@@ -128,14 +128,17 @@
             </a>
         @endif
     @else
-        <a href="{{ route('landing.admin') }}" class="btn-home">
-            <i class="bi bi-house-fill me-2"></i>Halaman Utama
+        <div class="deskripsi mb-2">Masuk sebagai:</div>
+        <a href="{{ route('landing.pasien') }}" class="btn-home">
+            <i class="bi bi-person-heart me-2"></i>Pasien
+        </a>
+        <a href="{{ route('landing.guru') }}" class="btn-home">
+            <i class="bi bi-mortarboard-fill me-2"></i>Guru
+        </a>
+        <a href="{{ route('landing.siswa') }}" class="btn-home">
+            <i class="bi bi-person-badge-fill me-2"></i>Siswa
         </a>
     @endauth
-
-    <button onclick="history.back()" class="btn-back">
-        <i class="bi bi-arrow-left me-2"></i>Kembali
-    </button>
 
     <div class="brand">
         <i class="bi bi-heart-pulse-fill me-1"></i>
